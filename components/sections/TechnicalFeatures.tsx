@@ -15,7 +15,7 @@ export const TechnicalFeatures = () => {
   return (
     <section
       ref={ref}
-      className="py-20 lg:py-28 bg-ate-neutral-50"
+      className="py-20 lg:py-28 bg-ate-neutral-50/90 backdrop-blur-sm"
       aria-label="Caratteristiche Tecniche"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">

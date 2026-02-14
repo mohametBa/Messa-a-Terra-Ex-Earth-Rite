@@ -21,12 +21,12 @@ const duplicatedLogos = [...certificationLogos, ...certificationLogos];
 export const TrustBar = () => {
   return (
     <section
-      className="relative py-16 bg-white border-y border-neutral-200 overflow-hidden"
+      className="relative py-16 bg-white/90 backdrop-blur-sm border-y border-neutral-200 overflow-hidden"
       aria-label="Certificazioni e conformità internazionali"
     >
       {/* Fade gradients edges */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white/90 to-transparent z-10" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white/90 to-transparent z-10" />
 
       <div className="container mx-auto px-6">
 
@@ -41,10 +41,6 @@ export const TrustBar = () => {
           <p className="text-xs font-semibold tracking-[0.25em] uppercase text-neutral-500 mb-3">
             Certificazioni Internazionali
           </p>
-
-          <h2 className="text-lg md:text-xl font-semibold text-neutral-900 mb-2">
-            Conformità ai più elevati standard di sicurezza industriale
-          </h2>
 
           <p className="text-sm text-neutral-600">
             Certificato ATEX, IECEx e SIL 2 per operazioni sicure in ambienti pericolosi

@@ -216,7 +216,7 @@ export const TechnicalSpecs = () => {
   return (
     <section
       ref={ref}
-      className="py-20 md:py-28 lg:py-32 bg-gradient-to-b from-gray-50 to-white"
+      className="py-20 md:py-28 lg:py-32 bg-gradient-to-b from-gray-50/90 to-white/90 backdrop-blur-sm"
       aria-label="Specifiche Tecniche"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">

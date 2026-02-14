@@ -8,18 +8,21 @@ import {
   Phone,
   MapPin,
   Linkedin,
-  Youtube,
   ExternalLink,
+  Send,
+  CheckCircle2,
 } from "lucide-react";
 import { Button } from "@/components/Button";
 import Image from "next/image";
 
 /**
  * CTA + Footer Section
- * Final call-to-action and modern footer with contact info, logos, and map
+ * Final call-to-action and modern footer with contact info, logos, newsletter, and map
  */
 export const CTAFooter = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterSubmitted, setNewsletterSubmitted] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -52,11 +55,21 @@ export const CTAFooter = () => {
     },
   };
 
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Newsletter subscription:", newsletterEmail);
+    setNewsletterSubmitted(true);
+    setTimeout(() => {
+      setNewsletterSubmitted(false);
+      setNewsletterEmail("");
+    }, 3000);
+  };
+
   return (
-    <div className="bg-ate-neutral-900" ref={ref}>
+    <div className="bg-gray-900" ref={ref}>
       {/* Final CTA Section */}
       <section
-        className="relative py-20 lg:py-28 bg-gradient-to-br from-ate-primary-800 to-ate-primary-950 overflow-hidden"
+        className="relative py-20 lg:py-28 bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden"
         aria-label="Call to Action Finale"
       >
         {/* Background Pattern */}
@@ -68,8 +81,8 @@ export const CTAFooter = () => {
           }}
         />
         {/* Decorative gradient orbs */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-ate-accent-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-ate-primary-400/10 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-red-500/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-red-600/10 rounded-full blur-3xl" />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
@@ -79,17 +92,10 @@ export const CTAFooter = () => {
             animate={isInView ? "visible" : "hidden"}
           >
             <div className="text-center mb-12">
-              <motion.span
-                className="inline-block px-4 py-1.5 rounded-full bg-white/10 text-ate-accent-400 text-sm font-medium mb-6 backdrop-blur-sm border border-white/10"
-                variants={childVariant}
-              >
-                Pronto per iniziare?
-              </motion.span>
-
               <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-4 leading-tight">
                 Migliora la Sicurezza del Tuo Impianto
               </h2>
-              <p className="text-lg text-ate-neutral-300 max-w-2xl mx-auto">
+              <p className="text-lg text-gray-300 max-w-2xl mx-auto">
                 Compila il modulo e un esperto ATEX ti contatterà per una consulenza personalizzata.
               </p>
             </div>
@@ -115,13 +121,13 @@ export const CTAFooter = () => {
                       </svg>
                     </div>
                     <h3 className="text-xl font-semibold text-white mb-2">Richiesta Inviata!</h3>
-                    <p className="text-ate-neutral-300">Ti contatteremo al più presto.</p>
+                    <p className="text-gray-300">Ti contatteremo al più presto.</p>
                   </div>
                 ) : (
                   <>
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
-                        <label htmlFor="cta-name" className="block text-sm font-medium text-ate-neutral-300 mb-1.5">
+                        <label htmlFor="cta-name" className="block text-sm font-medium text-gray-300 mb-1.5">
                           Nome e Cognome *
                         </label>
                         <input
@@ -129,14 +135,14 @@ export const CTAFooter = () => {
                           id="cta-name"
                           name="name"
                           required
-                          className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-ate-neutral-500
-                                     focus:border-ate-accent-500 focus:ring-2 focus:ring-ate-accent-500/20 focus:outline-none
+                          className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-500
+                                     focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none
                                      transition-all duration-200"
                           placeholder="Mario Rossi"
                         />
                       </div>
                       <div>
-                        <label htmlFor="cta-email" className="block text-sm font-medium text-ate-neutral-300 mb-1.5">
+                        <label htmlFor="cta-email" className="block text-sm font-medium text-gray-300 mb-1.5">
                           Email *
                         </label>
                         <input
@@ -144,8 +150,8 @@ export const CTAFooter = () => {
                           id="cta-email"
                           name="email"
                           required
-                          className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-ate-neutral-500
-                                     focus:border-ate-accent-500 focus:ring-2 focus:ring-ate-accent-500/20 focus:outline-none
+                          className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-500
+                                     focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none
                                      transition-all duration-200"
                           placeholder="mario@azienda.it"
                         />
@@ -154,29 +160,29 @@ export const CTAFooter = () => {
 
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
-                        <label htmlFor="cta-company" className="block text-sm font-medium text-ate-neutral-300 mb-1.5">
+                        <label htmlFor="cta-company" className="block text-sm font-medium text-gray-300 mb-1.5">
                           Azienda
                         </label>
                         <input
                           type="text"
                           id="cta-company"
                           name="company"
-                          className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-ate-neutral-500
-                                     focus:border-ate-accent-500 focus:ring-2 focus:ring-ate-accent-500/20 focus:outline-none
+                          className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-500
+                                     focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none
                                      transition-all duration-200"
                           placeholder="Nome azienda"
                         />
                       </div>
                       <div>
-                        <label htmlFor="cta-phone" className="block text-sm font-medium text-ate-neutral-300 mb-1.5">
+                        <label htmlFor="cta-phone" className="block text-sm font-medium text-gray-300 mb-1.5">
                           Telefono
                         </label>
                         <input
                           type="tel"
                           id="cta-phone"
                           name="phone"
-                          className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-ate-neutral-500
-                                     focus:border-ate-accent-500 focus:ring-2 focus:ring-ate-accent-500/20 focus:outline-none
+                          className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-500
+                                     focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none
                                      transition-all duration-200"
                           placeholder="+39 XXX XXX XXXX"
                         />
@@ -184,15 +190,15 @@ export const CTAFooter = () => {
                     </div>
 
                     <div>
-                      <label htmlFor="cta-message" className="block text-sm font-medium text-ate-neutral-300 mb-1.5">
+                      <label htmlFor="cta-message" className="block text-sm font-medium text-gray-300 mb-1.5">
                         Messaggio
                       </label>
                       <textarea
                         id="cta-message"
                         name="message"
                         rows={3}
-                        className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-ate-neutral-500
-                                   focus:border-ate-accent-500 focus:ring-2 focus:ring-ate-accent-500/20 focus:outline-none
+                        className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-500
+                                   focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none
                                    transition-all duration-200 resize-none"
                         placeholder="Come possiamo aiutarti?"
                       />
@@ -203,7 +209,7 @@ export const CTAFooter = () => {
                       variant="secondary"
                       size="lg"
                       fullWidth
-                      className="group"
+                      className="group bg-gradient-to-r from-[#E31E24] to-[#B91C1C] hover:from-[#B91C1C] hover:to-[#A01828] text-white"
                     >
                       Invia Richiesta
                       <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -218,7 +224,7 @@ export const CTAFooter = () => {
 
       {/* Footer */}
       <footer
-        className="bg-ate-neutral-950 text-ate-neutral-400"
+        className="bg-gray-950 text-gray-400"
         role="contentinfo"
       >
         {/* Main Footer Content */}
@@ -229,7 +235,7 @@ export const CTAFooter = () => {
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
           >
-            {/* Logos & Company Info - 4 cols */}
+            {/* Logos & Company Info + Newsletter - 4 cols */}
             <motion.div className="lg:col-span-4" variants={childVariant}>
               {/* Logos */}
               <div className="flex items-center gap-6 mb-6">
@@ -244,13 +250,13 @@ export const CTAFooter = () => {
                       className="h-10 w-auto object-contain"
                     />
                   </div>
-                  <span className="text-xs text-ate-neutral-500 mt-2 font-medium">
+                  <span className="text-xs text-gray-500 mt-2 font-medium">
                     Maffioletti S.r.l.
                   </span>
                 </div>
 
                 {/* Divider */}
-                <div className="h-16 w-px bg-ate-neutral-700" />
+                <div className="h-16 w-px bg-gray-700" />
 
                 {/* Logo Earth-Rite RTR */}
                 <div className="flex flex-col items-center">
@@ -263,7 +269,7 @@ export const CTAFooter = () => {
                       className="h-10 w-auto object-contain"
                     />
                   </div>
-                  <span className="text-xs text-ate-neutral-500 mt-2 font-medium">
+                  <span className="text-xs text-gray-500 mt-2 font-medium">
                     Earth-Rite RTR
                   </span>
                 </div>
@@ -274,18 +280,64 @@ export const CTAFooter = () => {
                 Sicurezza, innovazione e affidabilità per l&apos;industria.
               </p>
 
+              {/* Newsletter Subscription */}
+              <div className="mb-6">
+                <h4 className="text-white font-semibold mb-3 text-sm">
+                  Newsletter ATEX
+                </h4>
+                <p className="text-xs text-gray-500 mb-3">
+                  Ricevi aggiornamenti su normative, prodotti e sicurezza industriale
+                </p>
+                
+                {newsletterSubmitted ? (
+                  <div className="flex items-center gap-2 p-3 bg-green-500/10 border border-green-500/30 rounded-xl">
+                    <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
+                    <p className="text-sm text-green-400 font-medium">
+                      Iscrizione confermata!
+                    </p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
+                    <input
+                      type="email"
+                      value={newsletterEmail}
+                      onChange={(e) => setNewsletterEmail(e.target.value)}
+                      placeholder="La tua email"
+                      required
+                      className="flex-1 px-4 py-2.5 rounded-xl bg-gray-800/60 border border-gray-700 text-white text-sm placeholder-gray-500
+                                 focus:border-[#E31E24] focus:ring-2 focus:ring-[#E31E24]/20 focus:outline-none
+                                 transition-all duration-200"
+                      aria-label="Email per newsletter"
+                    />
+                    <button
+                      type="submit"
+                      className="px-4 py-2.5 bg-gradient-to-r from-[#E31E24] to-[#B91C1C] hover:from-[#B91C1C] hover:to-[#A01828] 
+                                 text-white rounded-xl font-medium transition-all duration-300 hover:shadow-lg hover:shadow-red-500/30
+                                 flex items-center justify-center group"
+                      aria-label="Iscriviti alla newsletter"
+                    >
+                      <Send className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </button>
+                  </form>
+                )}
+                <p className="text-xs text-gray-600 mt-2">
+                  Nessuno spam. Cancellati in qualsiasi momento.
+                </p>
+              </div>
+
               {/* Social Links */}
               <div className="flex gap-3">
                 <a
                   href="https://www.linkedin.com/company/maffioletti-srl/?originalSubdomain=it"
-                  className="w-10 h-10 rounded-xl bg-ate-neutral-800/80 flex items-center justify-center
-                             text-ate-neutral-400 hover:text-white hover:bg-ate-primary-700
-                             transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-ate-primary-700/20"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-xl bg-gray-800/80 flex items-center justify-center
+                             text-gray-400 hover:text-white hover:bg-[#0A66C2]
+                             transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20"
                   aria-label="LinkedIn"
                 >
                   <Linkedin className="w-4 h-4" />
                 </a>
-                
               </div>
             </motion.div>
 
@@ -300,12 +352,12 @@ export const CTAFooter = () => {
                     href="tel:+39035505115"
                     className="flex items-start gap-3 group"
                   >
-                    <div className="w-9 h-9 rounded-lg bg-ate-primary-900/50 flex items-center justify-center flex-shrink-0 group-hover:bg-ate-primary-700 transition-colors duration-300">
-                      <Phone className="w-4 h-4 text-ate-primary-400 group-hover:text-white transition-colors" />
+                    <div className="w-9 h-9 rounded-lg bg-gray-800/50 flex items-center justify-center flex-shrink-0 group-hover:bg-[#E31E24] transition-colors duration-300">
+                      <Phone className="w-4 h-4 text-red-400 group-hover:text-white transition-colors" />
                     </div>
                     <div>
-                      <p className="text-xs text-ate-neutral-500 mb-0.5">Telefono</p>
-                      <span className="text-sm text-ate-neutral-300 group-hover:text-white transition-colors font-medium">
+                      <p className="text-xs text-gray-500 mb-0.5">Telefono</p>
+                      <span className="text-sm text-gray-300 group-hover:text-white transition-colors font-medium">
                         +39 035 505115
                       </span>
                     </div>
@@ -316,12 +368,12 @@ export const CTAFooter = () => {
                     href="mailto:info@pinzediterraatex.it"
                     className="flex items-start gap-3 group"
                   >
-                    <div className="w-9 h-9 rounded-lg bg-ate-primary-900/50 flex items-center justify-center flex-shrink-0 group-hover:bg-ate-primary-700 transition-colors duration-300">
-                      <Mail className="w-4 h-4 text-ate-primary-400 group-hover:text-white transition-colors" />
+                    <div className="w-9 h-9 rounded-lg bg-gray-800/50 flex items-center justify-center flex-shrink-0 group-hover:bg-[#E31E24] transition-colors duration-300">
+                      <Mail className="w-4 h-4 text-red-400 group-hover:text-white transition-colors" />
                     </div>
                     <div>
-                      <p className="text-xs text-ate-neutral-500 mb-0.5">Email</p>
-                      <span className="text-sm text-ate-neutral-300 group-hover:text-white transition-colors font-medium">
+                      <p className="text-xs text-gray-500 mb-0.5">Email</p>
+                      <span className="text-sm text-gray-300 group-hover:text-white transition-colors font-medium">
                         info@pinzediterraatex.it
                       </span>
                     </div>
@@ -334,12 +386,12 @@ export const CTAFooter = () => {
                     rel="noopener noreferrer"
                     className="flex items-start gap-3 group"
                   >
-                    <div className="w-9 h-9 rounded-lg bg-ate-primary-900/50 flex items-center justify-center flex-shrink-0 group-hover:bg-ate-primary-700 transition-colors duration-300">
-                      <MapPin className="w-4 h-4 text-ate-primary-400 group-hover:text-white transition-colors" />
+                    <div className="w-9 h-9 rounded-lg bg-gray-800/50 flex items-center justify-center flex-shrink-0 group-hover:bg-[#E31E24] transition-colors duration-300">
+                      <MapPin className="w-4 h-4 text-red-400 group-hover:text-white transition-colors" />
                     </div>
                     <div>
-                      <p className="text-xs text-ate-neutral-500 mb-0.5">Sede</p>
-                      <address className="text-sm text-ate-neutral-300 not-italic group-hover:text-white transition-colors font-medium leading-snug">
+                      <p className="text-xs text-gray-500 mb-0.5">Sede</p>
+                      <address className="text-sm text-gray-300 not-italic group-hover:text-white transition-colors font-medium leading-snug">
                         Via dell&apos;Artigianato, 9<br />
                         24046 Osio Sotto BG
                       </address>
@@ -369,7 +421,7 @@ export const CTAFooter = () => {
                         className="text-sm hover:text-white transition-colors duration-200
                                    flex items-center gap-2 group"
                       >
-                        <span className="w-1 h-1 rounded-full bg-ate-primary-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                        <span className="w-1 h-1 rounded-full bg-[#E31E24] opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                         {link.label}
                       </a>
                     </li>
@@ -383,7 +435,7 @@ export const CTAFooter = () => {
               <h4 className="text-white font-semibold mb-6 text-sm uppercase tracking-wider">
                 Dove Siamo
               </h4>
-              <div className="relative rounded-xl overflow-hidden border border-ate-neutral-800 shadow-xl shadow-black/30">
+              <div className="relative rounded-xl overflow-hidden border border-gray-800 shadow-xl shadow-black/30">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2783.5!2d9.606!3d45.62!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4781514f0f0f0f0f%3A0x0!2sVia+dell'Artigianato%2C+9%2C+24046+Osio+Sotto+BG!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit"
                   width="100%"
@@ -399,7 +451,7 @@ export const CTAFooter = () => {
                   href="https://maps.google.com/?q=Via+dell'Artigianato+9+24046+Osio+Sotto+BG"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-ate-neutral-900 text-xs font-medium px-3 py-1.5 rounded-lg flex items-center gap-1.5 hover:bg-white transition-colors shadow-md"
+                  className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-gray-900 text-xs font-medium px-3 py-1.5 rounded-lg flex items-center gap-1.5 hover:bg-white transition-colors shadow-md"
                 >
                   <ExternalLink className="w-3 h-3" />
                   Apri in Maps
@@ -410,13 +462,13 @@ export const CTAFooter = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-ate-neutral-800/60">
+        <div className="border-t border-gray-800/60">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-              <p className="text-xs text-ate-neutral-600">
+              <p className="text-xs text-gray-600">
                 © {new Date().getFullYear()} Maffioletti S.r.l. — Distributore autorizzato Earth-Rite RTR. Tutti i diritti riservati.
               </p>
-              <p className="text-xs text-ate-neutral-600">
+              <p className="text-xs text-gray-600">
                 Progettato per la sicurezza industriale ATEX
               </p>
             </div>

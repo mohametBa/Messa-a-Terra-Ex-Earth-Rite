@@ -335,7 +335,7 @@ const ProblemSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="relative py-24 lg:py-32 bg-white overflow-hidden">
+    <section className="relative py-24 lg:py-32 bg-white/90 backdrop-blur-sm overflow-hidden">
       <div className="container mx-auto px-6 lg:px-8 max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
           {/* LEFT: Problem Content */}
@@ -449,7 +449,7 @@ const SolutionSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="py-24 lg:py-32 bg-white">
+    <section ref={ref} className="py-24 lg:py-32 bg-white/90 backdrop-blur-sm">
       <div className="container mx-auto px-6 lg:px-8 max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
           {/* LEFT: Image 2 - Earth-Rite system connected */}

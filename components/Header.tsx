@@ -43,7 +43,7 @@ const navItems: NavItem[] = [
   { label: 'Tester', href: '/tester', isDisabled: true },
   { label: 'Risorse', href: '/risorse', isDisabled: true },
   { label: 'Servizi', href: '/servizi', isDisabled: true },
-  { label: 'Contatti', href: '/contatti', isDisabled: true },
+  { label: 'Richiedi Preventivo', href: '/#cta', isDisabled: true },
 ];
 
 const rtrSubItems: NavSubItem[] = [

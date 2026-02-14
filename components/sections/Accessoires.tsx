@@ -342,7 +342,7 @@ export const ProductComponents = () => {
   return (
     <section
       ref={ref}
-      className="py-20 md:py-28 lg:py-32 bg-white"
+      className="py-20 md:py-28 lg:py-32 bg-white/90 backdrop-blur-sm"
       aria-label="Componenti e Accessori"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">

@@ -12,6 +12,7 @@ import TechnicalFeatures from '@/components/sections/TechnicalFeatures';
 import TechnicalSpecs from '@/components/sections/TechnicalSpecs';
 import Accessoires from '@/components/sections/Accessoires';
 import CTAFooter from '@/components/sections/CTAFooter';
+import AnimatedBackground from '@/components/Background';
 
 // Section tracking configuration
 const SECTION_CONFIG = {
@@ -92,6 +93,9 @@ export default function Home() {
 
   return (
     <>
+      {/* Background Animation - Outside main for proper z-index stacking */}
+      <AnimatedBackground />
+      
       {/* Scroll Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-ate-accent-500 to-ate-primary-600 origin-left z-[100]"
@@ -99,8 +103,7 @@ export default function Home() {
       />
 
       {/* Main Content */}
-      <main id="main-content" className="relative" role="main">
-        {/* Background Animation */}
+      <main id="main-content" className="relative z-10" role="main">
         {/* Page Transition Overlay */}
         <AnimatePresence>
           {isLoading && (
