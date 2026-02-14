@@ -255,18 +255,18 @@ export const TechnicalSpecs = () => {
                 `}
                 initial={false}
               >
-                {/* Accordion Header */}
+                {/* Accordion Header - Responsive */}
                 <button
-                  className="w-full px-6 py-6 flex items-center justify-between text-left
+                  className="w-full px-3 sm:px-4 md:px-6 py-4 md:py-6 flex items-center justify-between text-left
                              bg-white hover:bg-gray-50 transition-colors duration-200"
                   onClick={() => setExpandedIndex(isExpanded ? null : index)}
                   aria-expanded={isExpanded}
                   aria-controls={`spec-content-${index}`}
                 >
-                  <div className="flex items-center gap-4 flex-1">
+                  <div className="flex items-center gap-2 sm:gap-3 md:gap-4 flex-1 min-w-0">
                     <div
                       className={`
-                        p-3 rounded-xl transition-all duration-300
+                        p-2 md:p-3 rounded-xl transition-all duration-300 flex-shrink-0
                         ${
                           isExpanded
                             ? "bg-[#E31E24] text-white shadow-lg shadow-red-500/30"
@@ -280,14 +280,14 @@ export const TechnicalSpecs = () => {
                         }
                       `}
                     >
-                      <Icon className="w-6 h-6" aria-hidden="true" />
+                      <Icon className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
                     </div>
-                    <div className="flex-1">
-                      <h3 className="font-bold text-gray-900 text-lg mb-1">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-bold text-gray-900 text-sm sm:text-base md:text-lg mb-0.5 md:mb-1 truncate">
                         {row.category}
                       </h3>
                       {row.subtitle && (
-                        <p className="text-sm text-gray-600">{row.subtitle}</p>
+                        <p className="text-xs sm:text-sm text-gray-600 truncate">{row.subtitle}</p>
                       )}
                     </div>
                   </div>
@@ -295,9 +295,9 @@ export const TechnicalSpecs = () => {
                   <motion.div
                     variants={iconVariants}
                     animate={isExpanded ? "expanded" : "collapsed"}
-                    className="text-gray-400"
+                    className="text-gray-400 flex-shrink-0 ml-2"
                   >
-                    <ChevronDown className="w-6 h-6" aria-hidden="true" />
+                    <ChevronDown className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
                   </motion.div>
                 </button>
 
@@ -310,17 +310,17 @@ export const TechnicalSpecs = () => {
                   style={{ overflow: "hidden" }}
                 >
                   <div className="border-t-2 border-gray-100 bg-gradient-to-br from-gray-50 to-white">
-                    <div className="p-6">
-                      {/* Image and Content Layout */}
-                      <div className={`flex gap-6 ${!row.image ? 'justify-center' : ''}`}>
+                    <div className="p-3 sm:p-4 md:p-6">
+                      {/* Image and Content Layout - Responsive */}
+                      <div className={`flex flex-col md:flex-row gap-4 md:gap-6 ${!row.image ? 'justify-center' : ''}`}>
                         {/* Image Section */}
                         {row.image && (
-                          <div className="flex-shrink-0 w-48 md:w-56">
+                          <div className="flex-shrink-0 w-full sm:w-2/3 md:w-48 lg:w-56 mx-auto md:mx-0">
                             <div
                               className="rounded-xl overflow-hidden border-2 border-gray-200 bg-white shadow-lg cursor-pointer hover:shadow-xl transition-shadow duration-300"
                               onClick={() => setLightboxImage({ src: row.image!, alt: row.imageAlt || row.category })}
                             >
-                              <div className="relative aspect-square w-full">
+                              <div className="relative aspect-square w-full max-w-[200px] sm:max-w-[250px] md:max-w-none mx-auto">
                                 <Image
                                   src={row.image}
                                   alt={row.imageAlt || row.category}
@@ -335,9 +335,10 @@ export const TechnicalSpecs = () => {
 
                         {/* Content Section */}
                         <div className="flex-1 min-w-0">
-                          {/* Specifications Table */}
+                          {/* Specifications Table - Responsive */}
                           <div className="rounded-xl overflow-hidden border border-gray-200">
-                            <table className="w-full">
+                            {/* Desktop Table View */}
+                            <table className="w-full hidden sm:table">
                               <tbody>
                                 {row.specs.map((spec, specIndex) => (
                                   <tr
@@ -351,37 +352,49 @@ export const TechnicalSpecs = () => {
                                       }
                                     `}
                                   >
-                                    <td className="px-6 py-4 text-gray-700 font-medium w-2/5">
+                                    <td className="px-3 md:px-6 py-3 md:py-4 text-gray-700 font-medium w-2/5 text-sm md:text-base">
                                       {spec.param}
                                     </td>
-                                    <td className="px-6 py-4 text-gray-900 font-semibold w-3/5">
+                                    <td className="px-3 md:px-6 py-3 md:py-4 text-gray-900 font-semibold w-3/5 text-sm md:text-base">
                                       {spec.value}
                                     </td>
                                   </tr>
                                 ))}
                               </tbody>
                             </table>
+                            {/* Mobile Card View */}
+                            <div className="sm:hidden divide-y divide-gray-100">
+                              {row.specs.map((spec, specIndex) => (
+                                <div
+                                  key={spec.param}
+                                  className={`p-3 ${specIndex % 2 === 0 ? "bg-white" : "bg-gray-50"}`}
+                                >
+                                  <p className="text-xs text-gray-500 font-medium mb-1">{spec.param}</p>
+                                  <p className="text-sm text-gray-900 font-semibold">{spec.value}</p>
+                                </div>
+                              ))}
+                            </div>
                           </div>
 
-                          {/* Certifications */}
+                          {/* Certifications - Responsive */}
                           {row.certifications && row.certifications.length > 0 && (
-                            <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-xl">
-                              <div className="flex items-start gap-3">
-                                <div className="p-2 bg-green-100 rounded-lg">
-                                  <Shield className="w-5 h-5 text-green-700" />
+                            <div className="mt-4 md:mt-6 p-3 md:p-4 bg-green-50 border border-green-200 rounded-xl">
+                              <div className="flex items-start gap-2 md:gap-3">
+                                <div className="p-1.5 md:p-2 bg-green-100 rounded-lg flex-shrink-0">
+                                  <Shield className="w-4 h-4 md:w-5 md:h-5 text-green-700" />
                                 </div>
-                                <div className="flex-1">
-                                  <h4 className="font-semibold text-green-900 mb-2">
+                                <div className="flex-1 min-w-0">
+                                  <h4 className="font-semibold text-green-900 mb-2 text-sm md:text-base">
                                     Certificazioni
                                   </h4>
                                   <ul className="space-y-1">
                                     {row.certifications.map((cert, idx) => (
                                       <li
                                         key={idx}
-                                        className="text-sm text-green-800 flex items-start gap-2"
+                                        className="text-xs md:text-sm text-green-800 flex items-start gap-2"
                                       >
                                         <svg
-                                          className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5"
+                                          className="w-3 h-3 md:w-4 md:h-4 text-green-600 flex-shrink-0 mt-0.5"
                                           fill="none"
                                           viewBox="0 0 24 24"
                                           stroke="currentColor"
@@ -393,7 +406,7 @@ export const TechnicalSpecs = () => {
                                             d="M5 13l4 4L19 7"
                                           />
                                         </svg>
-                                        <span className="font-mono text-xs">
+                                        <span className="font-mono text-[10px] md:text-xs break-all">
                                           {cert}
                                         </span>
                                       </li>
@@ -413,22 +426,23 @@ export const TechnicalSpecs = () => {
           })}
         </div>
 
-        {/* Lightbox */}
+        {/* Lightbox - Responsive */}
         {lightboxImage && (
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
             onClick={() => setLightboxImage(null)}
           >
             <button
-              className="absolute top-4 right-4 p-2 text-white hover:bg-white/20 rounded-full transition-colors"
+              className="absolute top-2 right-2 sm:top-4 sm:right-4 p-2 text-white hover:bg-white/20 rounded-full transition-colors"
               onClick={() => setLightboxImage(null)}
+              aria-label="Chiudi"
             >
-              <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-6 h-6 sm:w-8 sm:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
             <div
-              className="relative max-w-4xl max-h-[90vh] w-full mx-4"
+              className="relative max-w-4xl max-h-[90vh] w-full"
               onClick={(e) => e.stopPropagation()}
             >
               <Image
@@ -436,10 +450,10 @@ export const TechnicalSpecs = () => {
                 alt={lightboxImage.alt}
                 width={800}
                 height={600}
-                className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
+                className="w-full h-auto max-h-[75vh] sm:max-h-[85vh] object-contain rounded-lg"
                 priority
               />
-              <p className="text-center text-white mt-4 text-lg font-medium">
+              <p className="text-center text-white mt-2 sm:mt-4 text-sm sm:text-lg font-medium px-4">
                 {lightboxImage.alt}
               </p>
             </div>
